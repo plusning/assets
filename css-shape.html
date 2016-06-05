@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <title>纯CSS画的基本图形</title>
+  <style>
+    /*1.矩形*/
+    #rectangle {
+      width: 100px;
+      height: 50px;
+      background: red;
+    }
+    /*1s.正方形*/
+    #square {
+      width: 100px;
+      height: 100px;
+      background: green;
+    }
+    /*2.圆角矩形*/
+    #rounded-rectangle {
+      width: 100px;
+      height: 50px;
+      background: red;
+      -moz-border-radius: 10px;
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+    }
+    /*2s.圆角正方形*/
+    #rounded-square {
+      width: 100px;
+      height: 100px;
+      background: green;
+      -moz-border-radius: 10px;
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+    }
+    /*3.椭圆形*/
+    #oval {
+      width: 100px;
+      height: 50px;
+      background: red;
+      -moz-border-radius: 50px / 25px;
+      -webkit-border-radius: 50px / 25px;
+      border-radius: 50px / 25px;
+    }
+    /*3s.正圆形*/
+    #circle {
+      width: 100px;
+      height: 100px;
+      background: green;
+      -moz-border-radius: 50px;
+      -webkit-border-radius: 50px;
+      border-radius: 50px;
+    }
+    /*4.三角形*/
+    #triangle-up {
+      width: 0;
+      height: 0;
+      border-left: 50px solid transparent;
+      border-right: 50px solid transparent;
+      border-bottom: 100px solid red;
+    }
+    /*4s.正三角形 tan(60°)≈1.732*/
+    #regular-triangle-up {
+      width: 0;
+      height: 0;
+      border-left: 50px solid transparent;
+      border-right: 50px solid transparent;
+      border-bottom: 87px solid green;
+    }
+    /*5.下三角形*/
+    #triangle-down {
+      width: 0;
+      height: 0;
+      border-left: 50px solid transparent;
+      border-right: 50px solid transparent;
+      border-top: 100px solid red;
+    }
+    /*5s.正下三角形 tan(60°)≈1.732*/
+    #regular-triangle-down {
+      width: 0;
+      height: 0;
+      border-left: 50px solid transparent;
+      border-right: 50px solid transparent;
+      border-top: 87px solid green;
+    }
+    /*6.左三角形*/
+    #triangle-left {
+      width: 0;
+      height: 0;
+      border-top: 50px solid transparent;
+      border-right: 100px solid red;
+      border-bottom: 50px solid transparent;
+    }
+    /*6s.正左三角形 tan(60°)≈1.732*/
+    #regular-triangle-left {
+      width: 0;
+      height: 0;
+      border-top: 50px solid transparent;
+      border-right: 87px solid green;
+      border-bottom: 50px solid transparent;
+    }
+    /*7.右三角形*/
+    #triangle-right {
+      width: 0;
+      height: 0;
+      border-top: 50px solid transparent;
+      border-left: 100px solid red;
+      border-bottom: 50px solid transparent;
+    }
+    /*7s.正右三角形 tan(60°)≈1.732*/
+    #regular-triangle-right {
+      width: 0;
+      height: 0;
+      border-top: 50px solid transparent;
+      border-left: 87px solid green;
+      border-bottom: 50px solid transparent;
+    }
+    /*8.直角三角形*/
+    #triangle-bottomleft {
+      width: 0;
+      height: 0;
+      border-bottom: 100px solid red;
+      border-right: 50px solid transparent;
+    }
+    /*8s.正直角三角形*/
+    #regular-triangle-bottomleft {
+      width: 0;
+      height: 0;
+      border-bottom: 100px solid green;
+      border-right: 100px solid transparent;
+    }
+    /*9.左上三角形*/
+    #triangle-topleft {
+      width: 0;
+      height: 0;
+      border-top: 100px solid red; 
+      border-right: 50px solid transparent;
+    }
+    /*9s.正左上三角形*/
+    #regular-triangle-topleft {
+      width: 0;
+      height: 0;
+      border-top: 100px solid green; 
+      border-right: 100px solid transparent;
+    }
+    /*10.右上三角形*/
+    #triangle-topright {
+      width: 0;
+      height: 0;
+      border-top: 100px solid red;
+      border-left: 50px solid transparent;
+    }
+    /*10s.正右上三角形*/
+    #regular-triangle-topright {
+      width: 0;
+      height: 0;
+      border-top: 100px solid green;
+      border-left: 100px solid transparent;
+    }
+    /*11.右下三角形*/
+    #triangle-bottomright {
+      width: 0;
+      height: 0;
+      border-bottom: 100px solid red;
+      border-left: 50px solid transparent;
+    }
+    /*11s.正右下三角形*/
+    #regular-triangle-bottomright {
+      width: 0;
+      height: 0;
+      border-bottom: 100px solid green;
+      border-left: 100px solid transparent;
+    }
+    /*12.平行四边形 tan(20°)≈0.363 */
+    #parallelogram {
+      width: 82px; /* w <= s-2t */
+      height: 50px; /* h */
+      -webkit-transform: skew(20deg);
+      -moz-transform: skew(20deg);
+      -o-transform: skew(20deg);
+      background: red;
+      margin-left: 9px; /* t=h/2*tan(20°) */
+    }
+    /*13.菱形 */
+    #rhombus {
+      width: 70px; /* a = 0.707s */
+      height: 70px; /* a */
+      -moz-transform:    rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      -ms-transform:     rotate(45deg);
+      -o-transform:      rotate(45deg);
+      background: red;
+      margin-left: 15px; /* 0.207a */
+    }
+    /*14.梯形*/
+    #trapezoid {
+      width: 40px; /* w = s-2x */
+      height: 0;
+      border-bottom: 50px solid red; /* h */
+      border-left: 30px solid transparent; /* x < s/2 */
+      border-right: 30px solid transparent; /* x < s/2 */
+    }
+    /*15.五边形 cos(18°)≈0.951 sin(18°)≈0.309 sin(54°)≈0.809 cos(54°)≈0.588 */
+    #pentagon {
+      width: 62px; /* a=s/2/sin(54°) */
+      height: 0;
+      border-width: 59px 19px 0; /* b=cos(18°)a c=sin(18°)a */
+      border-style: solid;
+      border-color: red transparent;
+      position: relative;
+      margin-top: 50px; /* d */
+    }
+    #pentagon:before {
+      width: 0;
+      height: 0;
+      border-width: 0 50px 36px; /* d=sin(54°)a e=cos(54°)a */
+      border-style: solid;
+      border-color: transparent transparent red;
+      position: absolute;
+      content: "";
+      top: -95px; /* b + e */
+      left: -19px; /* c */
+    }
+    /*16.六边形 cos(60°)=0.5 sin(60°)≈0.866 */
+    #hexagon {
+      width: 87px; /* w=sin(60°)*s */
+      height: 50px; /* a=s/2*/
+      background: red;
+      position: relative;
+      margin: 29px 0; /* b */
+    }
+    #hexagon:before {
+      width: 0;
+      height: 0;
+      border-left: 43px solid transparent; /* w/2 */
+      border-right: 43px solid transparent; /* w/2 */
+      border-bottom: 25px solid red; /* b=cos(60°)a */
+      position: absolute;
+      content: "";
+      top: -25px; /* -b */
+      left: 0;
+    }
+    #hexagon:after {
+      width: 0;
+      height: 0;
+      border-left: 43px solid transparent; /* w/2 */
+      border-right: 43px solid transparent; /* w/2 */
+      border-top: 25px solid red; /* b=cos(60°)a */
+      position: absolute;
+      content: "";
+      bottom: -25px; /* -b */
+      left: 0;
+    }
+    /*17.八边形 sin(45°)≈0.707 */
+    #octagon {
+      width: 100px; /* w */
+      height: 42px; /* a=w/(2*sin(45°)+1) */
+      background: red;
+      position: relative;
+      margin: 29px 0; /* b */
+    }
+    #octagon:before {
+      width: 42px; /* a */
+      height: 0;
+      border-right: 29px solid transparent; /* b=sin(45°)a */
+      border-bottom: 29px solid red; /* b */
+      border-left: 29px solid transparent; /* b */
+      position: absolute;
+      content: "";
+      top: -29px; /* b */
+      left: 0;
+    }
+    #octagon:after {
+      width: 42px; /* a */
+      height: 0;
+      border-right: 29px solid transparent; /* b=sin(45°)a */
+      border-top: 29px solid red; /* b */
+      border-left: 29px solid transparent; /* b */
+      position: absolute;
+      content: "";
+      bottom: -29px; /* b */
+      left: 0;
+    }
+    /*18.六角星 tan(60°)≈1.732 */
+    #star-six {
+      width: 0;
+      height: 0;
+      border-left: 42px solid transparent; /* t/tan(60°) */
+      border-right: 42px solid transparent; /* t/tan(60°) */
+      border-bottom: 72px solid red; /* t=s/4*3 */
+      position: relative;
+      margin-bottom: 24px; /* s/4 */
+    }
+    #star-six:after {
+      width: 0;
+      height: 0;
+      border-left: 42px solid transparent; /* t/tan(60°) */
+      border-right: 42px solid transparent; /* t/tan(60°) */
+      border-top: 72px solid red; /* t */
+      position: absolute;
+      content: "";
+      top: 24px; /* s/4 */
+      left: -42px; /* t/tan(60°) */
+    }
+    /*19.五角星*/
+    #star-five {
+      width: 0;
+      height: 0;
+      border-right:  50px solid transparent;
+      border-bottom: 35px  solid red;
+      border-left:   50px solid transparent;
+      -moz-transform:    rotate(35deg);
+      -webkit-transform: rotate(35deg);
+      -ms-transform:     rotate(35deg);
+      -o-transform:      rotate(35deg);
+      position: relative;
+      display: block;
+      color: red;
+      margin: 28px 0;
+    }
+    #star-five:before {
+      height: 0;
+      width: 0;
+      border-bottom: 40px solid red;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      -webkit-transform: rotate(-35deg);
+      -moz-transform:    rotate(-35deg);
+      -ms-transform:     rotate(-35deg);
+      -o-transform:      rotate(-35deg);
+      position: absolute;
+      content: '';
+      top: -24px;
+      left: -34px;
+      display: block;
+    }
+    #star-five:after {
+      width: 0;
+      height: 0;
+      border-right: 50px solid transparent;
+      border-bottom: 35px solid red;
+      border-left: 50px solid transparent;
+      -webkit-transform: rotate(-70deg);
+      -moz-transform:    rotate(-70deg);
+      -ms-transform:     rotate(-70deg);
+      -o-transform:      rotate(-70deg);
+      position: absolute;
+      content: '';
+      display: block;
+      color: red;
+      top: 3px;
+      left: -55px;
+    }
+    /*20.爱心*/
+    #heart {
+      width: 100px;
+      height: 90px;
+      position: relative;
+    }
+    #heart:before,
+    #heart:after {
+      width: 50px;
+      height: 80px;
+      -moz-border-radius: 50px 50px 0 0;
+      border-radius: 50px 50px 0 0;
+      -webkit-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      -o-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+      -webkit-transform-origin: 0 100%;
+      -moz-transform-origin: 0 100%;
+      -ms-transform-origin: 0 100%;
+      -o-transform-origin: 0 100%;
+      transform-origin: 0 100%;
+      position: absolute;
+      content: "";
+      background: red;
+      left: 50px;
+      top: 0;
+    }
+    #heart:after {
+      -webkit-transform: rotate(45deg);
+      -moz-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      transform: rotate(45deg);
+      -webkit-transform-origin: 100% 100%;
+      -moz-transform-origin: 100% 100%;
+      -ms-transform-origin: 100% 100%;
+      -o-transform-origin: 100% 100%;
+      transform-origin :100% 100%;
+      left: 0;
+    }
+    /*21.无穷大*/
+    #infinity {
+      width: 106px;
+      height: 50px;
+      position: relative;
+    }
+    #infinity:before,
+    #infinity:after {
+      width: 30px;
+      height: 30px;
+      border: 10px solid red;
+      -moz-border-radius: 25px 25px 0 25px;
+      border-radius: 25px 25px 0 25px;
+      -webkit-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      -o-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+    }
+    #infinity:after {
+      left: auto;
+      right: 0;
+      -moz-border-radius: 25px 25px 25px 0;
+      border-radius: 25px 25px 25px 0;
+      -webkit-transform: rotate(45deg);
+      -moz-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+    /*22.鸡蛋*/
+    #egg {
+      width: 60px; 
+      height: 100px;
+      background-color: red;
+      -webkit-border-radius: 30px 30px 30px 30px / 54px 54px 36px 36px;
+      border-radius:        50%   50%  50%  50%  / 60%  60%  40%  40%;
+      display:block;
+    }
+    #egg-h {
+      width: 100px; 
+      height: 60px;
+      background-color: orange;
+      -webkit-border-radius: 36px 54px 54px 36px / 30px 30px 30px 30px;
+      border-radius:         40%  60%  60%  40% / 50%   50%  50%  50%;
+      display:block;
+    }
+    /*23.食逗人*/
+    #pacman {
+      width: 0;
+      height: 0;
+      border-right: 60px solid transparent;
+      border-top: 60px solid red;
+      border-left: 60px solid red;
+      border-bottom: 60px solid red;
+      border-radius: 60px 60px 60px 60px;
+    }
+    /*24.提示框*/
+    #talkbubble {
+      width: 100px; 
+      height: 60px; 
+      background: red;
+      -moz-border-radius:    10px;
+      -webkit-border-radius: 10px;
+      border-radius:         10px;
+      position: relative;
+      margin-left: 13px;
+    }
+    #talkbubble:before {
+      width: 0;
+      height: 0;
+      border-top: 7px solid transparent;
+      border-right: 13px solid red;
+      border-bottom: 7px solid transparent;
+      position: absolute;
+      content:"";
+      right: 100%;
+      top: 23px;
+    }
+    /*25.12角星*/
+    #burst-12 {
+      width: 80px;
+      height: 80px;
+      background: red;
+      position: relative;
+      margin-left: 13px;
+    }
+    #burst-12:before,
+    #burst-12:after {
+      height: 80px;
+      width: 80px;
+      background: red;
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+    }
+    #burst-12:before {
+      -webkit-transform: rotate(30deg);
+      -moz-transform: rotate(30deg);
+      -ms-transform: rotate(30deg);
+      -o-transform: rotate(30deg);
+      transform: rotate(30deg);
+    }
+    #burst-12:after {
+      -webkit-transform: rotate(60deg);
+      -moz-transform: rotate(60deg);
+      -ms-transform: rotate(60deg);
+      -o-transform: rotate(60deg);
+      transform: rotate(60deg);
+    }
+    /*26.8角星*/
+    #burst-8 {
+      width: 80px;
+      height: 80px;
+      background: red;
+      -webkit-transform: rotate(20deg);
+      -moz-transform: rotate(20deg);
+      -ms-transform: rotate(20deg);
+      -o-transform: rotate(20eg);
+      transform: rotate(20deg);
+      position: relative;
+      margin-left: 13px;
+    }
+    #burst-8:before {
+      height: 80px;
+      width: 80px;
+      background: red;
+      -webkit-transform: rotate(135deg);
+      -moz-transform: rotate(135deg);
+      -ms-transform: rotate(135deg);
+      -o-transform: rotate(135deg);
+      transform: rotate(135deg);
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+    }
+    /*27.钻石*/
+    #cut-diamond {
+      width: 50px;
+      height: 0;
+      border-style: solid;
+      border-color: transparent transparent blueviolet transparent;
+      border-width: 0 25px 25px 25px;
+      position: relative;
+      margin-bottom: 70px;
+    }
+    #cut-diamond:after {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-color: blueviolet transparent transparent transparent;
+      border-width: 70px 50px 0 50px;
+      position: absolute;
+      content: "";
+      top: 25px;
+      left: -25px;
+    }
+    /*28.阴阳八卦*/
+    #yin-yang {
+      width: 96px;
+      height: 48px;
+      background: #eee;
+      border-color: red;
+      border-style: solid;
+      border-width: 2px 2px 50px 2px;
+      border-radius: 100%;
+      position: relative;
+    }
+    #yin-yang:before {
+      width: 12px;
+      height: 12px;
+      background: #eee;
+      border: 18px solid red;
+      border-radius: 100%;
+      position: absolute;
+      content: "";
+      top: 50%;
+      left: 0;
+    }
+    #yin-yang:after {
+      width: 12px;
+      height: 12px;
+      background: red;
+      border: 18px solid #eee;
+      border-radius:100%;
+      position: absolute;
+      content: "";
+      top: 50%;
+      left: 50%;
+    }
+  </style>
+</head>
+<body style="padding-left:0">
+  <h1>纯CSS画的基本图形</h1>
+  <!--矩形-->
+  <h2>1.矩形</h2>
+  <div id="rectangle"></div>
+  <!--正方形-->
+  <h3>1s.正方形</h3>
+  <div id="square"></div>
+  <!--圆角矩形-->
+  <h2>2.圆角矩形</h2>
+  <div id="rounded-rectangle"></div>
+  <!--圆角正方形-->
+  <h3>2s.圆角正方形</h3>
+  <div id="rounded-square"></div>
+  <!--椭圆形-->
+  <h2>3.椭圆形</h2>
+  <div id="oval"></div>
+  <!--正圆形-->
+  <h3>3s.正圆形</h3>
+  <div id="circle"></div>
+  <!--三角形-->
+  <h2>4.三角形</h2>
+  <div id="triangle-up"></div>
+  <!--正三角形-->
+  <h3>4s.正三角形</h3>
+  <div id="regular-triangle-up"></div>
+  <!--下三角形-->
+  <h2>5.下三角形</h2>
+  <div id="triangle-down"></div>
+  <!--正下三角形-->
+  <h3>5s.正下三角形</h3>
+  <div id="regular-triangle-down"></div>
+  <!--左三角形-->
+  <h2>6.左三角形</h2>
+  <div id="triangle-left"></div>
+  <!--正左三角形-->
+  <h3>6s.正左三角形</h3>
+  <div id="regular-triangle-left"></div>
+  <!--右三角形-->
+  <h2>7.右三角形</h2>
+  <div id="triangle-right"></div>
+  <!--正右三角形-->
+  <h3>7s.正右三角形</h3>
+  <div id="regular-triangle-right"></div>
+  <!--直角三角形-->
+  <h2>8.直角三角形</h2>
+  <div id="triangle-bottomleft"></div>
+  <!--正直角三角形-->
+  <h3>8s.正直角三角形</h3>
+  <div id="regular-triangle-bottomleft"></div>
+  <!--左上三角形-->
+  <h2>9.左上三角形</h2>
+  <div id="triangle-topleft"></div>
+  <!--正左上三角形-->
+  <h3>9s.正左上三角形</h3>
+  <div id="regular-triangle-topleft"></div>
+  <!--右上三角形-->
+  <h2>10.右上三角形</h2>
+  <div id="triangle-topright"></div>
+  <!--正右上三角形-->
+  <h3>10s.正右上三角形</h3>
+  <div id="regular-triangle-topright"></div>
+  <!--右下三角形-->
+  <h2>11.右下三角形</h2>
+  <div id="triangle-bottomright"></div>
+  <!--正右下三角形-->
+  <h3>11s.正右下三角形</h3>
+  <div id="regular-triangle-bottomright"></div>
+  <!--平行四边形-->
+  <h2>12.平行四边形</h2>
+  <div id="parallelogram"></div>
+  <!--菱形-->
+  <h2>13.菱形</h2>
+  <div id="rhombus"></div>
+  <!--梯形-->
+  <h2>14.梯形</h2>
+  <div id="trapezoid"></div>
+  <!--五角大楼-->
+  <h2>15.五边形</h2>
+  <div id="pentagon"></div>
+  <!--六边形-->
+  <h2>16.六边形</h2>
+  <div id="hexagon"></div>
+  <!--八边形-->
+  <h2>17.八边形</h2>
+  <div id="octagon"></div>
+  <!--六角星-->
+  <h2>18.六角星</h2>
+  <div id="star-six"></div>
+  <!--五角星-->
+  <h2>19.五角星</h2>
+  <div id="star-five"></div>
+  <!--爱心-->
+  <h2>20.爱心</h2>
+  <div id="heart"></div>
+  <!--无穷大-->
+  <h2>21.无穷大</h2>
+  <div id="infinity"></div>
+  <!--鸡蛋-->
+  <h2>22.鸡蛋</h2>
+  <div id="egg"></div>
+  <div id="egg-h"></div>
+  <!--食逗人-->
+  <h2>23.食逗人</h2>
+  <div id="pacman"></div>
+  <!--提示框-->
+  <h2>24.提示框</h2>
+  <div id="talkbubble"></div>
+  <!--12角星-->
+  <h2>25.12角星</h2>
+  <div id="burst-12"></div>
+  <!--8角星-->
+  <h2>26.8角星</h2>
+  <div id="burst-8"></div>
+  <!--钻石-->
+  <h2>27.钻石</h2>
+  <div id="cut-diamond"></div>
+  <!--阴阳八卦-->
+  <h2>28.阴阳八卦</h2>
+  <div id="yin-yang"></div>
+</body>
+</html>
